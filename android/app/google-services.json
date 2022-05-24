@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "127411722371",
+    "firebase_url": "https://testfirebase-65da8.firebaseio.com",
+    "project_id": "testfirebase-65da8",
+    "storage_bucket": "testfirebase-65da8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127411722371:android:e65abc4fdd931a5d20e3b6",
+        "android_client_info": {
+          "package_name": "io.terabits.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD87R0_VA-7u6hxKN3VhCQhCaNjd_gznn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "127411722371-1oqqgtedt3m7bg7i374mhophk8kb0dn0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.terabits.flash-chat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127411722371:android:de0a563a157bd77f20e3b6",
+        "android_client_info": {
+          "package_name": "io.terabits.flt_bootstrap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD87R0_VA-7u6hxKN3VhCQhCaNjd_gznn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "127411722371-1oqqgtedt3m7bg7i374mhophk8kb0dn0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.terabits.flash-chat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127411722371:android:434ba63b05ecb6b320e3b6",
+        "android_client_info": {
+          "package_name": "io.terabits.sample.flt_sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD87R0_VA-7u6hxKN3VhCQhCaNjd_gznn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "127411722371-1oqqgtedt3m7bg7i374mhophk8kb0dn0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.terabits.flash-chat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
