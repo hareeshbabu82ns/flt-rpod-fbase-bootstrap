@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flt_bootstrap/controllers/auth_controller.dart';
 import 'package:flt_bootstrap/controllers/item_list_controller.dart';
 import 'package:flt_bootstrap/firebase_options.dart';
+import 'package:flt_bootstrap/general_providers.dart';
 import 'package:flt_bootstrap/models/item_model.dart';
 import 'package:flt_bootstrap/repositories/custom_exception.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,12 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const providerConfigs = [
       GoogleProviderConfiguration(
         clientId:
@@ -35,9 +36,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FbasePod Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ref.watch(themeDataProvider),
       initialRoute:
           FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/home',
       routes: {
@@ -119,6 +118,24 @@ class HomeScreen extends HookConsumerWidget {
           IconButton(
             onPressed: () => Navigator.pushNamed(context, '/profile'),
             icon: const Icon(Icons.person_outline),
+          ),
+          IconButton(
+            onPressed: () => ref
+                .read(themeColorSeedProvider.notifier)
+                .update((state) => const Color(0xFF9B640C)),
+            icon: const Icon(Icons.color_lens_outlined),
+          ),
+          IconButton(
+            onPressed: () =>
+                ref.read(themeModeControllerProvider.notifier).toggle(),
+            icon: HookConsumer(
+              builder: (context, ref, child) {
+                final mode = ref.watch(themeModeControllerProvider);
+                return Icon(mode == Brightness.dark
+                    ? Icons.wb_sunny_outlined
+                    : Icons.dark_mode_outlined);
+              },
+            ),
           ),
         ],
       ),
@@ -279,9 +296,7 @@ class AddItemDialog extends HookConsumerWidget {
                   Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: isUpdating
-                      ? Colors.orange
-                      : Theme.of(context).primaryColor,
+                  primary: Theme.of(context).primaryColor,
                 ),
                 child: Text(isUpdating ? 'Update' : 'Add'),
               ),
