@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flt_bootstrap/controllers/auth_controller.dart';
 import 'package:flt_bootstrap/controllers/item_list_controller.dart';
@@ -6,6 +7,7 @@ import 'package:flt_bootstrap/models/item_model.dart';
 import 'package:flt_bootstrap/repositories/custom_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() async {
@@ -22,13 +24,60 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const providerConfigs = [
+      GoogleProviderConfiguration(
+        clientId:
+            '127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com',
+      ),
+      EmailProviderConfiguration(),
+    ];
+
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'FbasePod Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      initialRoute:
+          FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/home',
+      routes: {
+        '/sign-in': (context) {
+          return SignInScreen(
+            providerConfigs: providerConfigs,
+            showAuthActionSwitch: false, // to disable reigistration
+            actions: [
+              AuthStateChangeAction<SignedIn>((context, state) {
+                Navigator.pushReplacementNamed(context, '/home');
+              }),
+            ],
+          );
+        },
+        '/profile': (context) {
+          return ProfileScreen(
+            providerConfigs: providerConfigs,
+            actions: [
+              SignedOutAction((context) {
+                Navigator.pushReplacementNamed(context, '/sign-in');
+              }),
+            ],
+          );
+        },
+        '/home': (context) {
+          if (FirebaseAuth.instance.currentUser == null) {
+            return SignInScreen(
+              providerConfigs: providerConfigs,
+              showAuthActionSwitch: false,
+              actions: [
+                AuthStateChangeAction<SignedIn>((context, state) {
+                  Navigator.pushReplacementNamed(context, '/home');
+                }),
+              ],
+            );
+          } else {
+            return const HomeScreen();
+          }
+        },
+      },
     );
   }
 }
@@ -59,15 +108,18 @@ class HomeScreen extends HookConsumerWidget {
             icon: const Icon(Icons.refresh),
           ),
           IconButton(
-              onPressed: () => ref.read(itemListFilterProvider.state).state =
-                  isObtainedFilter
-                      ? ItemListFilter.all
-                      : ItemListFilter.obtained,
-              icon: Icon(
-                isObtainedFilter
-                    ? Icons.check_circle
-                    : Icons.check_circle_outline,
-              )),
+            onPressed: () => ref.read(itemListFilterProvider.state).state =
+                isObtainedFilter ? ItemListFilter.all : ItemListFilter.obtained,
+            icon: Icon(
+              isObtainedFilter
+                  ? Icons.check_circle
+                  : Icons.check_circle_outline,
+            ),
+          ),
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, '/profile'),
+            icon: const Icon(Icons.person_outline),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
