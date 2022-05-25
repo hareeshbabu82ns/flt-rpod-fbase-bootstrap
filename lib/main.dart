@@ -30,6 +30,7 @@ class MyApp extends HookConsumerWidget {
         clientId:
             '127411722371-k4vcqsrq7ppn35sav99dafv7t1e7pvuv.apps.googleusercontent.com',
       ),
+      AppleProviderConfiguration(),
       EmailProviderConfiguration(),
     ];
 
